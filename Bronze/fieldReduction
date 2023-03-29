@@ -1,0 +1,48 @@
+def calcArea(removed):
+    global n, pos, minArea
+    curmaxx = 0
+    curmaxy = 0
+    curminx = 40001
+    curminy = 40001
+    for i in range(n):
+        if i == removed:
+            continue
+        if pos[i][0] > curmaxx:
+            curmaxx = pos[i][0]
+        if pos[i][1] > curmaxy:
+            curmaxy = pos[i][1]
+        if pos[i][0] < curminx:
+            curminx = pos[i][0]
+        if pos[i][1] < curminy:
+            curminy = pos[i][1]
+    curArea = (curmaxy-curminy)*(curmaxx-curminx)
+
+    if curArea < minArea:
+        minArea = curArea
+inpu = open("reduce.in", "r")
+n = int(inpu.readline())
+pos = [0]*n
+for i in range(n):
+    pos[i] = [0,0]
+    pos[i][0], pos[i][1] = inpu.readline().split(); pos[i][0], pos[i][1] = int(pos[i][0]), int(pos[i][1])
+inpu.close()
+minArea = 1600080001
+maxx = 0
+minx = 0
+maxy = 0
+miny = 0
+for i in range(n):
+    if pos[i][0] > pos[maxx][0]:
+        maxx = i
+    if pos[i][1] > pos[maxy][1]:
+        maxy = i
+    if pos[i][0] < pos[minx][0]:
+        minx = i
+    if pos[i][1] < pos[miny][1]:
+        miny = i
+calcArea(miny)
+calcArea(maxy)
+calcArea(minx)
+calcArea(maxx)
+ou = open("reduce.out", "w")
+ou.write(str(minArea))
