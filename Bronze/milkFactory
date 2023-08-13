@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+vector<int> cur;
+vector<vector<int>> ans;
+int n, conveyers[110][2], cnt = 0;
+
+void arrive(int j)
+{
+    for (int i = 0; i < n-1; i++)
+    {
+        if (conveyers[i][0] == j)
+        {
+            cur.push_back(conveyers[i][1]);
+            arrive(conveyers[i][1]);
+        }
+    }
+}
+int main()
+{
+    freopen("factory.in", "r", stdin);
+    freopen("factory.out", "w", stdout);
+    cin >> n;
+    for (int i = 0; i < n-1; i++)
+    {
+        cin >> conveyers[i][1] >> conveyers[i][0];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cur.clear();
+        arrive(i+1);
+        ans.push_back(cur);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (ans[i].size() == n-1)
+        {
+            cout << (i+1);
+            return 0;
+        }
+    }
+    cout << -1;
+}
