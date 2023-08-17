@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <map>
+#include <algorithm>
+using namespace std;
+
+bool works = true;
+int n, m, cowPatches[160][2], scenarios[160][2];
+int main()
+{
+    freopen("revegetate.in", "r", stdin);
+    freopen("revegetate.out", "w", stdout);
+    cin >> n >> m;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> cowPatches[i][0] >> cowPatches[i][1];
+    }
+    for (int patch = 1; patch <= n; patch++)
+    {
+        for (int grass = 1; grass <= 4; grass++)
+        {
+            works = true;
+            for (int i = 0; i < m; i++)
+            {
+                if ((cowPatches[i][0] == patch && scenarios[i][1] == grass)||(cowPatches[i][1] == patch && scenarios[i][0] == grass))
+                {
+                    works = false;
+                }
+            }
+            if (works)
+            {
+                for (int i = 0; i < m; i++)
+                {
+                    if (cowPatches[i][0] == patch)
+                        scenarios[i][0] = grass;
+                    if (cowPatches[i][1] == patch)
+                        scenarios[i][1] = grass;
+                }
+                cout << grass;
+                break;
+            }
+        }
+    }
+}
