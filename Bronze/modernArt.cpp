@@ -1,14 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <map>
 #include <algorithm>
 using namespace std;
 
-bool possible = true, drank = false;
 int n, miniX[10], maxiX[10], miniY[10], maxiY[10], works[10], ans = 0;
 string canvas[20];
-map <int, int> shakes;
 int main()
 {
     freopen("art.in", "r", stdin);
