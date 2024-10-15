@@ -19,4 +19,40 @@ for i in range(26):
             pairs += 1
 ou = open("circlecross.out", "w")
 ou.write(str(pairs))
-ou.close()
+ou.close
+
+//cpp code
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#define f first
+#define s second
+using namespace std;
+
+int n = 52, cnt[26], ans, start;
+string s;
+int main()
+{
+    freopen("circlecross.in", "r", stdin);
+    freopen("circlecross.out", "w", stdout);
+    cin >> s;
+    for (int cur = 0; cur < 26; cur++)
+    {
+        start = 0;
+        for (int i = 0; i < 26; i++)
+            cnt[i] = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (s[i] == (char)(cur+'A'))
+                start = 1-start;
+            if (start)
+            {
+                cnt[s[i]-'A']++;
+            }
+        }
+        for (int i = 0; i < 26; i++)
+            if (cnt[i] == 1 && i != cur)
+                ans++;
+    }
+    cout << ans/2;
+}
